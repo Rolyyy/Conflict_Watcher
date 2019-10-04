@@ -17,6 +17,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button LoginBtn;
     private TextView LoginText;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +29,19 @@ public class LoginActivity extends AppCompatActivity {
         LoginBtn = findViewById(R.id.loginButton);
         LoginText = findViewById(R.id.loginText);
 
+
         //Called when Login button pressed. Sends user input for validation
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 login(Email.getText().toString(), Password.getText().toString());
+            }
+        });
+
+        LoginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 

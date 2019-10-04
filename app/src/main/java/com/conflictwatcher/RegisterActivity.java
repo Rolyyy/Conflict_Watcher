@@ -26,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button regButton;
     private TextView goToLogin;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.registerEmail);
         regButton = findViewById(R.id.registerButton);
         goToLogin = findViewById(R.id.registerGoToLogin);
+
 
     }
 

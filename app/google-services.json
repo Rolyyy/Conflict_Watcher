@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "519859347206",
+    "firebase_url": "https://conflictwatcher-001.firebaseio.com",
+    "project_id": "conflictwatcher-001",
+    "storage_bucket": "conflictwatcher-001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519859347206:android:07599c8c065ffd73e38887",
+        "android_client_info": {
+          "package_name": "com.conflictwatcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519859347206-u40sduakq75914htr6htv9fst2h1th8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEcSgST17KhIFD8zYkyYetGykZokJSBNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519859347206-u40sduakq75914htr6htv9fst2h1th8h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

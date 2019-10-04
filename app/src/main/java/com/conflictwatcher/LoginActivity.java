@@ -48,12 +48,12 @@ public class LoginActivity extends AppCompatActivity {
 
         progress = new ProgressDialog((this));
 
-        /*
+
         if(user != null){
             startActivity(new Intent(LoginActivity.this, MapActivity.class));
             finish();
         }
-        */
+
 
         //Called when Login button pressed. Sends user input for validation
         LoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progress.dismiss();
-                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(LoginActivity.this, MapActivity.class));
-                    finish(); //Correct use of this???
+                    emailVerificationCheck();
                 }
                 else{
                     progress.dismiss();
@@ -97,5 +95,33 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
+
+    private void emailVerificationCheck(){
+
+        FirebaseUser user = auth.getInstance().getCurrentUser();
+        Boolean emailcheck = user.isEmailVerified();
+
+        if(emailcheck){
+            Toast.makeText(this, "Logging in...", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(LoginActivity.this, MapActivity.class));
+            finish();
+        }
+        else{
+            Toast toast = Toast.makeText(this, "You must verify your E-mail address before logging in!", Toast.LENGTH_SHORT);
+            TextView v = toast.getView().findViewById(android.R.id.message);
+            v.setTextColor(Color.RED);
+            toast.show();
+
+            auth.signOut();
+        }
+
+
+
+    }
+
 }
+

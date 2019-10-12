@@ -2,10 +2,13 @@ package com.conflictwatcher;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -57,11 +60,28 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
+
         //Called when Login button pressed. Sends user input for validation
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login(Email.getText().toString(), Password.getText().toString());
+            boolean check = true;
+                if(Email.getText().toString().trim().length() == 0){
+                    Email.setError("Please don't leave blank!");
+                    check = false;
+
+                }
+
+                if(Password.getText().toString().trim().length() == 0){
+                    Password.setError("Please don't leave blank!");
+                    check = false;
+
+                }
+                if(check){
+                    login(Email.getText().toString(), Password.getText().toString());
+
+                }
+
             }
         });
 
@@ -96,10 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     progress.dismiss();
-                    Toast toast = Toast.makeText(LoginActivity.this, "FAILED To Login!", Toast.LENGTH_SHORT);
-                    TextView v = toast.getView().findViewById(android.R.id.message);
-                    v.setTextColor(Color.RED);
-                    toast.show();
+                    Email.setError("Failed to login. Please check inputs.");
+                    Password.setError("Failed to login. Please check inputs.");
                 }
             }
         });

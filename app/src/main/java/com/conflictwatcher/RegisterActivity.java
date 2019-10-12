@@ -2,6 +2,7 @@ package com.conflictwatcher;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
-    private EditText userName, userEmail, userPw;
+    private EditText userName, userEmail, userPw, userPw2;
     private Button regButton;
     private TextView goToLogin;
 
@@ -40,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(validation() ==true){
+                if(validation()){
 
                     String email = userEmail.getText().toString().trim();
                     String password = userPw.getText().toString().trim();
@@ -54,7 +55,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }
                             else{
+
+                                //NEED TO:
+                                //Get reason for failure from Firebase server(part of API)
+
                                 Toast.makeText(RegisterActivity.this, "FAILED To Register!", Toast.LENGTH_LONG).show();
+
+
 
                             }
                         }
@@ -76,26 +83,52 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private Boolean validation(){
-        //Need to add more validation here...
         // 1) user gives 2 passwords which must match
         // 2) user inputs must have a minimum and maximum length
         // 3) user password should be checked for strength(i.e using special chars & Uppercase)
 
-        Boolean result = false;
+        boolean result = true;
 
         String name = userName.getText().toString();
         String email = userEmail.getText().toString();
         String password = userPw.getText().toString();
+        String password2 = userPw2.getText().toString();
 
-        if(name.isEmpty() || email.isEmpty() || password.isEmpty() ){
-            Toast toast = Toast.makeText(this, "Make sure all fields are filled in!", Toast.LENGTH_SHORT);
-            TextView v = toast.getView().findViewById(android.R.id.message);
-            v.setTextColor(Color.RED);
-            toast.show();
+        if(name.isEmpty()) {
+            userName.setError("Please don't leave blank!");
+            result = false;
         }
-        else{
-            result = true;
+
+        if(email.isEmpty()) {
+            userEmail.setError("Please don't leave blank!");
+            result = false;
         }
+
+        if(password.isEmpty()) {
+            userPw.setError("Please don't leave blank!");
+            result = false;
+        }
+
+        if(password2.isEmpty()) {
+            userPw2.setError("Please don't leave blank!");
+            result = false;
+
+        }
+
+        if(!password.equals(password2)) {
+            userPw.setError("Your passwords do not match!");
+            userPw2.setError("Your passwords do not match!");
+
+            result = false;
+        }
+
+        if(password.length()<6) {
+            userPw.setError("Password must be at least 6 characters long!");
+            userPw2.setError("Password must be at least 6 characters long");
+            result = false;
+
+        }
+
 
         return result;
     }
@@ -129,6 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void createViews(){
         userName = findViewById(R.id.registerUsername);
         userPw = findViewById(R.id.registerPassword);
+        userPw2 = findViewById(R.id.registerPassword2);
         userEmail = findViewById(R.id.registerEmail);
         regButton = findViewById(R.id.registerButton);
         goToLogin = findViewById(R.id.registerGoToLogin);

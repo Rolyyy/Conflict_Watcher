@@ -2,6 +2,7 @@ package com.conflictwatcher;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,21 +35,20 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String email = forgotEditText.getText().toString().trim();
-                if(email.equals(null)){
-                    Toast.makeText(ForgotPasswordActivity.this, "Please enter your e-mail address.", Toast.LENGTH_LONG).show();
+                if(forgotEditText.getText().toString().trim().length() == 0){
+                    forgotEditText.setError("Please don't leave blank!");
                 }
                 else{
                   auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                       @Override
                       public void onComplete(@NonNull Task<Void> task) {
                       if(task.isSuccessful()){
-                          Toast.makeText(ForgotPasswordActivity.this, "Password reset has been sent to your e-mail address.", Toast.LENGTH_LONG).show();
+                          Toast.makeText(ForgotPasswordActivity.this, "Password reset link has been sent to your e-mail address!", Toast.LENGTH_LONG).show();
                           startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
                           finish();
                       }
                       else{
-                          Toast.makeText(ForgotPasswordActivity.this, "Failed to send password reset. Please check your given e-mail address.", Toast.LENGTH_LONG).show();
-
+                          forgotEditText.setError("Failed to reset password. Please check your input!");
                       }
                       }
                   });

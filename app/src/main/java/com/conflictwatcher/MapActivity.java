@@ -6,28 +6,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
-    private DrawerLayout drawerLayout;
 
+    private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
     private Button btnLogout;
 
@@ -100,6 +100,22 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     //Called when the Map is ready
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        try {
+            //Use of a .json file in order to change the style of the map
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+
+            if (!success) {
+                Log.e("TAG", "Style parsing failed.");
+
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e("TAG", "Can't find style. Error: ", e);
+        }
+
+
         LatLng stdView = new LatLng(-28.335, 26.481);
         //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(stdView));

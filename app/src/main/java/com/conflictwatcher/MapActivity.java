@@ -15,11 +15,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
     private DrawerLayout drawerLayout;
 
     private FirebaseAuth auth;
@@ -30,6 +36,10 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        //Setting up the Map Fragment
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
         auth = FirebaseAuth.getInstance();
 
         btnLogout = findViewById(R.id.logout_btn);
@@ -38,6 +48,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onClick(View view) {
                 auth.signOut();
+                Toast.makeText(MapActivity.this, "Logging out...", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(MapActivity.this, LoginActivity.class));
                 finish();
             }
@@ -86,4 +97,12 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     }
 
 
+    //Called when the Map is ready
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng stdView = new LatLng(-28.335, 26.481);
+        //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(stdView));
+
+    }
 }

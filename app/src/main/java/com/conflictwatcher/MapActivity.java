@@ -21,11 +21,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Map;
 
-public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+
+public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnPolygonClickListener {
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
@@ -116,9 +120,37 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         }
 
 
-        LatLng stdView = new LatLng(-28.335, 26.481);
+        LatLng stdView = new LatLng(44.5309, 28.0522);
         //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(stdView));
+
+
+        int color_purple = 0x4d165ac7;
+
+        Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(
+                        new LatLng(51.645, -0.138),
+                        new LatLng(51.368, 0.1448),
+                        new LatLng(51.483, -0.5046)));
+
+
+        polygon1.setFillColor(color_purple);
+        polygon1.setStrokeWidth(0f);
+        polygon1.isClickable();
+
+
+        googleMap.setOnPolygonClickListener(this);
+
+
+
+
+
+    }
+
+    @Override
+    public void onPolygonClick(Polygon polygon) {
+        Toast.makeText(MapActivity.this, "Polygon Clicked!", Toast.LENGTH_SHORT).show();
 
     }
 }

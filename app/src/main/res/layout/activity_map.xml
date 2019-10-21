@@ -29,19 +29,12 @@
             android:layout_height="wrap_content"
             android:text="Map"
             android:textSize="16dp"
+            android:textStyle="bold"
             android:textColor="#ffff"
             android:layout_gravity="left"
             android:id="@+id/toolbar_title" />
 
-        <ImageView
-            android:id="@+id/help_button"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_help"
-            android:layout_marginRight="10dp"
 
-            />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -62,27 +55,17 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="45dp"
             android:scaleType="centerCrop"
-            android:id="@+id/ic_gps"
+            android:id="@+id/layers_btn"
             android:src="@drawable/ic_layers"
             android:background="@drawable/white_border"
-
-            android:contentDescription="Choose map layers" />
-
-
-
-        <Button
-            android:id="@+id/logout_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="Logout"
-
+            android:contentDescription="Choose map layers"
             />
 
 
+
+
+
     </FrameLayout>
-
-
 
 
     <com.google.android.material.navigation.NavigationView

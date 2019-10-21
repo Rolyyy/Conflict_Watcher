@@ -33,7 +33,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
-    private Button btnLogout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +46,16 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         auth = FirebaseAuth.getInstance();
 
-        btnLogout = findViewById(R.id.logout_btn);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth.signOut();
-                Toast.makeText(MapActivity.this, "Logging out...", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(MapActivity.this, LoginActivity.class));
-                finish();
-            }
-        });
 
+
+        setupNav(savedInstanceState);
+
+
+
+    }
+
+    private void setupNav(Bundle savedInstanceState) {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -73,13 +71,14 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             navigationView.setCheckedItem(R.id.nav_map);
         }
 
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_map:
-                Toast.makeText(this, "Map", Toast.LENGTH_LONG).show();
+
 
                 break;
             case R.id.nav_events:
@@ -92,7 +91,10 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 break;
 
             case R.id.nav_profile:
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MapActivity.this, ProfileActivity.class));
+                finish();
+
+
                 break;
         }
 

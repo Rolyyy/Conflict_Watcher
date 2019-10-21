@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <group android:checkableBehavior="single"
-        tools:showIn="navigation_view">
+        tools:showIn="navigation_view"
+        >
 
         <item
             android:id="@+id/nav_map"
@@ -27,11 +28,20 @@
 
     </group>
 
-    <item android:title="Template item 1">
+    <item android:title="Extra">
         <menu>
             <item
-                android:id="@+id/nav_item1"
-                android:title="item 1" />
+                android:id="@+id/nav_acknowledgments"
+                android:title="Acknowledgments"
+                android:icon="@drawable/ic_ackn"
+                />
+
+            <item
+                android:id="@+id/nav_help"
+                android:title="Help and Feedback"
+                android:icon="@drawable/ic_help"
+
+                />
 
         </menu>
     </item>

@@ -2,6 +2,7 @@ package com.conflictwatcher;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +43,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        logout();
+        deleteDialog();
+
+
+    }
+
+    private void logout() {
         btnLogout = findViewById(R.id.settings_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +60,6 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        deleteDialog();
-
-
     }
 
     private void deleteDialog() {
@@ -87,9 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                        // Get auth credentials from the user for re-authentication. The example below shows
-                        // email and password credentials but there are multiple possible providers,
-                        // such as GoogleAuthProvider or FacebookAuthProvider.
+                        // Get auth credentials from the user for re-authentication.
                         String credential1 = userEmail.getText().toString();
                         String credential2 = userPass.getText().toString();
 
@@ -101,7 +104,9 @@ public class SettingsActivity extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        user.delete()
+                                        if (task.isSuccessful()){
+                                            Log.d("tag", "Authentication Successful.");
+                                            user.delete()
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -119,6 +124,10 @@ public class SettingsActivity extends AppCompatActivity {
                                                         }
                                                     }
                                                 });
+                                        }else {
+                                            Toast.makeText(SettingsActivity.this, "Authentication has failed!",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 });
                     }

@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:background="#ffff"
         android:text="Confirm"
+        android:textStyle="bold"
         android:layout_below="@id/delete_password"
         android:layout_alignEnd="@id/dialog_text"
         android:textColor="@color/colorPrimary"

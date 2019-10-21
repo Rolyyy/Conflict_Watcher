@@ -48,7 +48,7 @@
 
             />
 
-        <ImageView
+        <Button
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="start"
@@ -56,9 +56,11 @@
             android:layout_marginTop="45dp"
             android:scaleType="centerCrop"
             android:id="@+id/layers_btn"
-            android:src="@drawable/ic_layers"
-            android:background="@drawable/white_border"
+            android:drawableTop="@drawable/ic_layers"
+            android:padding="5dp"
+            android:background="@drawable/themed_button"
             android:contentDescription="Choose map layers"
+
             />
 
 

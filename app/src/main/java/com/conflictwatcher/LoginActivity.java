@@ -2,22 +2,20 @@ package com.conflictwatcher;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -138,10 +136,12 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
         else{
-            Toast toast = Toast.makeText(this, "You must verify your E-mail address before logging in!", Toast.LENGTH_SHORT);
-            TextView v = toast.getView().findViewById(android.R.id.message);
-            v.setTextColor(Color.RED);
-            toast.show();
+
+
+            ConstraintLayout constraintLayout = findViewById(R.id.constraint_layout);
+            Snackbar snackbar = Snackbar.make(constraintLayout, "You must verify your E-mail address before logging in!", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+
 
             auth.signOut();
         }

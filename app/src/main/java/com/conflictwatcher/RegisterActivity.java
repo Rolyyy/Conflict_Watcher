@@ -2,10 +2,8 @@ package com.conflictwatcher;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,7 +58,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 //NEED TO:
                                 //Get reason for failure from Firebase server(part of API)
 
-                                Toast.makeText(RegisterActivity.this, "FAILED To Register!", Toast.LENGTH_LONG).show();
+
+                                ConstraintLayout constraintLayout = findViewById(R.id.constraint_layout);
+                                Snackbar snackbar = Snackbar.make(constraintLayout, "FAILED To Register Account!", Snackbar.LENGTH_SHORT);
+                                snackbar.show();
 
 
 
@@ -141,16 +143,25 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(RegisterActivity.this, "Registration Successful. E-mail Verification has been sent!", Toast.LENGTH_LONG).show();
+
+
+
+                        //Setup a custom Toast in order to make this more visible
+                        Toast toast = Toast.makeText(RegisterActivity.this, "Registration Successful. E-mail Verification has been sent!", Toast.LENGTH_LONG);
+                        toast.show();
+
+
+
                         auth.signOut();
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         finish();
                     }
                     else{
-                        Toast toast = Toast.makeText(RegisterActivity.this, "FAILED to send verification e-mail!", Toast.LENGTH_SHORT);
-                        TextView v = toast.getView().findViewById(android.R.id.message);
-                        v.setTextColor(Color.RED);
-                        toast.show();
+
+                        ConstraintLayout constraintLayout = findViewById(R.id.constraint_layout);
+                        Snackbar snackbar = Snackbar.make(constraintLayout, "FAILED to send verification e-mail!", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+
                     }
                 }
             });

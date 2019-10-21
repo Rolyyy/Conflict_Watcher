@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/themed_button"
-        android:drawableStart="@drawable/ic_help"
+        android:drawableStart="@drawable/ic_delete"
         android:drawablePadding="10dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"

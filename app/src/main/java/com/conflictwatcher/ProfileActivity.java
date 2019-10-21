@@ -12,16 +12,19 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
     private Button btnLogout;
+    private Button btnSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,31 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_profile);
 
         auth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        String userEmail = firebaseUser.getEmail();
+        String userName = firebaseUser.getDisplayName();
+
+
+        TextView profileEmail = findViewById(R.id.profile_email);
+        if(userEmail!=null){
+            profileEmail.setText(userEmail);
+        }
+        TextView profileName = findViewById(R.id.profile_name);
+        if (userName!=null){
+            profileName.setText(userName);
+        }
+
+        btnSettings = findViewById(R.id.settings_btn);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+            }
+        });
+
 
         btnLogout = findViewById(R.id.logout_btn);
-
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

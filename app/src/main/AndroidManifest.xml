@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".EventsActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".MapActivity" />
@@ -27,14 +28,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDmpvsJq-_8vQoH0XDfl-RrP5Ntts4hmm0"/>
-
-
-
+            android:value="AIzaSyDmpvsJq-_8vQoH0XDfl-RrP5Ntts4hmm0" />
     </application>
 
 </manifest>

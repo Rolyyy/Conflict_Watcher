@@ -11,13 +11,13 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -25,14 +25,16 @@ import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Map;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnPolygonClickListener {
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
+
 
 
     @Override
@@ -50,6 +52,13 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
 
         setupNav(savedInstanceState);
+        csvSetup();
+
+
+
+    }
+
+    private void csvSetup() {
 
 
 
@@ -123,7 +132,31 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
 
         LatLng stdView = new LatLng(44.5309, 28.0522);
-        //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+
+      //  googleMap.addMarker(new MarkerOptions().position(new LatLng(44, 28)).title("Random marker"));
+
+
+
+        //CSV Start
+        List<String[]> rows = new ArrayList<>();
+        CSVReader csvReader = new CSVReader(MapActivity.this, "201910syria.csv");
+        try {
+            rows = csvReader.readCSV();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker);
+
+        for (int i = 0; i < rows.size(); i++) {
+            double myLat = Double.valueOf(rows.get(i)[22]);
+            double myLong = Double.valueOf(rows.get(i)[23]);
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).title("Random marker"));
+        }
+
+
+
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(stdView));
 
 

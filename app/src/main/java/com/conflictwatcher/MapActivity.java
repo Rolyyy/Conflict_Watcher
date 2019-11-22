@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.conflictwatcher.Main.CustomInfoWindowAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -131,7 +133,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         }
 
 
-        LatLng stdView = new LatLng(44.5309, 28.0522);
+        LatLng stdView = new LatLng(34.849875, 38.869629);
 
       //  googleMap.addMarker(new MarkerOptions().position(new LatLng(44, 28)).title("Random marker"));
 
@@ -148,16 +150,20 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker);
 
+        googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this)); //Set the info window to the custom one created
+
+        /// !!!
+        /// IF my database format changes, this loop has to be reformatted!
         for (int i = 0; i < rows.size(); i++) {
             double myLat = Double.valueOf(rows.get(i)[22]);
             double myLong = Double.valueOf(rows.get(i)[23]);
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).title("Random marker"));
+            String data_info = "Date: " + rows.get(i)[4] + "  Event: " + rows.get(i)[8];
+
+            Log.d("mydatainfo",data_info);
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).title("title")).setSnippet(data_info);
+
         }
-
-
-
-
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(stdView));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stdView, 6f));
 
 
         int color_purple = 0x4d165ac7;

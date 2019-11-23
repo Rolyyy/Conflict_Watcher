@@ -1,4 +1,4 @@
-package com.conflictwatcher;
+package com.conflictwatcher.Other;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,20 +9,20 @@ import java.io.InputStream;
 import java.util.List;
 
 //Class for reading data from a CSV file within the project directory
-class CSVReader {
+public class CSVReader {
 
     private String fileName;
     private Context context;
     private List<String[]> rows = new ArrayList<>();
 
-    CSVReader(Context context, String fileName) {
+   public CSVReader(Context context, String fileName) {
         this.context = context;
         this.fileName = fileName;
 
     }
 
 
-    List<String[]> readCSV() throws IOException {
+   public List<String[]> readCSV() throws IOException {
         InputStream is = context.getAssets().open(fileName); //gets the CSV file
 
         InputStreamReader isr = new InputStreamReader(is);

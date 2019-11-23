@@ -1,8 +1,10 @@
-package com.conflictwatcher;
+package com.conflictwatcher.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.conflictwatcher.R;
 
 public class EventsActivity extends AppCompatActivity {
 

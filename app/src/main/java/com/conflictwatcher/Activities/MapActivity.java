@@ -1,4 +1,4 @@
-package com.conflictwatcher;
+package com.conflictwatcher.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.conflictwatcher.Main.CustomInfoWindowAdapter;
+import com.conflictwatcher.Other.CSVReader;
+import com.conflictwatcher.Other.CustomInfoWindowAdapter;
+import com.conflictwatcher.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,20 +157,26 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         /// !!!
         /// IF my database format changes, this loop has to be reformatted!
+        double myLat;
+        double myLong;
+        String data_info;
+
         for (int i = 0; i < rows.size(); i++) {
-            double myLat = Double.valueOf(rows.get(i)[22]);
-            double myLong = Double.valueOf(rows.get(i)[23]);
-            String data_info = "Date: " + rows.get(i)[4] + "  Event: " + rows.get(i)[8];
+             myLat = Double.valueOf(rows.get(i)[22]);
+             myLong = Double.valueOf(rows.get(i)[23]);
+             data_info = "Date: " + rows.get(i)[4] + "  Event: " + rows.get(i)[8];
 
             Log.d("mydatainfo",data_info);
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).title("title")).setSnippet(data_info);
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).icon(icon).title("title")).setSnippet(data_info);
+
 
         }
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stdView, 6f));
 
 
-        int color_purple = 0x4d165ac7;
 
+
+        int color_purple = 0x4d165ac7;
         Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
                 .add(

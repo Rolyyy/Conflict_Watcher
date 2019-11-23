@@ -1,4 +1,4 @@
-package com.conflictwatcher.Main;
+package com.conflictwatcher.Other;
 
 
 import com.google.android.gms.maps.GoogleMap;

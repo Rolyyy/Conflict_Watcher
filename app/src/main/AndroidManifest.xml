@@ -11,13 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SettingsActivity"></activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".EventsActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".MapActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Activities.SettingsActivity"></activity>
+        <activity android:name=".Activities.ProfileActivity" />
+        <activity android:name=".Activities.EventsActivity" />
+        <activity android:name=".Activities.LoginReg.ForgotPasswordActivity" />
+        <activity android:name=".Activities.MapActivity" />
+        <activity android:name=".Activities.LoginReg.RegisterActivity" />
+        <activity android:name=".Activities.LoginReg.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

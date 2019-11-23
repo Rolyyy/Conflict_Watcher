@@ -1,4 +1,4 @@
-package com.conflictwatcher;
+package com.conflictwatcher.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.conflictwatcher.Activities.LoginReg.LoginActivity;
+import com.conflictwatcher.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

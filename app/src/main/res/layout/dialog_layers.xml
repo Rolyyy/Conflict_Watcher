@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/dialog_layers_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:text="Map details"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_layers_text"
+        android:text="Select your layers."
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/dialog_layers_title"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:linksClickable="true"
+        android:clickable="true"
+        android:focusable="true"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_layers_checkbox_polygon"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/dialog_layers_text"
+        android:text="Syria Polygon"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_layers_checkbox_points"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/dialog_layers_checkbox_polygon"
+        android:text="Syria Data Points"
+        />
+
+
+
+
+    <Button
+        android:id="@+id/confirm_layers_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffff"
+        android:text="Confirm"
+        android:textStyle="bold"
+        android:layout_below="@id/dialog_layers_checkbox_points"
+        android:layout_alignEnd="@id/dialog_layers_checkbox_points"
+        android:textColor="@color/colorPrimary"
+        android:stateListAnimator="@null"
+        />
+
+</RelativeLayout>

@@ -6,14 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
-
 import com.conflictwatcher.Other.CSVReader;
 import com.conflictwatcher.Other.CustomInfoWindowAdapter;
 import com.conflictwatcher.R;
@@ -32,9 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
-
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,15 +58,10 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
 
         setupNav(savedInstanceState);
-        csvSetup();
-
 
     }
 
-    private void csvSetup() {
 
-
-    }
 
     private void setupNav(Bundle savedInstanceState) {
 
@@ -121,7 +115,33 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        Button layers_button = findViewById(R.id.layers_btn);
 
+      layers_button.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+
+
+              //Creating an instance of AlertDialog
+              AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapActivity.this);
+              View mView = getLayoutInflater().inflate(R.layout.dialog_layers, null);  //Custom layout used for the dialog
+              mBuilder.setView(mView);
+
+              //Create and display the dialog
+              final AlertDialog dialog = mBuilder.create();
+              dialog.show();
+
+              //Button with onClickListener which closes the dialog:
+              Button close_dialog = mView.findViewById(R.id.confirm_layers_dialog);
+
+              close_dialog.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      dialog.dismiss();
+                  }
+              });
+          }
+      });
 
         LatLng stdView = new LatLng(34.849875, 38.869629);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stdView, 6f));
@@ -183,7 +203,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         int color_fill = 0x4d165ac7;
         try {
-            GeoJsonLayer layer = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
+             GeoJsonLayer layer = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
+
 
             GeoJsonPolygonStyle style = layer.getDefaultPolygonStyle();
             style.setFillColor(color_fill);

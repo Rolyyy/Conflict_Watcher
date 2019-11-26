@@ -47,8 +47,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
 
-
-
+    private GeoJsonLayer layer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         setupNav(savedInstanceState);
 
     }
-
 
 
     private void setupNav(Bundle savedInstanceState) {
@@ -120,79 +118,35 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        Button layers_button = findViewById(R.id.layers_btn);
-
-
-      layers_button.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-
-
-              //Creating an instance of AlertDialog
-              AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapActivity.this);
-              View mView = getLayoutInflater().inflate(R.layout.dialog_layers, null);  //Custom layout used for the dialog
-              mBuilder.setView(mView);
-
-              //Used to read state of checkbox
-              final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-              boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
-
-              final CheckBox checkbox_polygon = mView.findViewById(R.id.dialog_layers_checkbox_polygon);
-
-              checkbox_polygon.setChecked(isMyValueChecked);
-              checkbox_polygon.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View view) {
-                      //updates checkbox state
-                      SharedPreferences.Editor editor = sharedPref.edit();
-                      editor.putBoolean("checkbox", ((CheckBox) view).isChecked());
-                      editor.commit();
-                      if(checkbox_polygon.isChecked()){
-                          Log.d("checkbox_check", "Checkbox 1 set to TRUE!");
-                      }else{
-                          Log.d("checkbox_check", "Checkbox 1 set to FALSE!");
-                      }
-                  }
-              });
-
-              if(checkbox_polygon.isChecked()){
-                  Log.d("checkbox_check", "Checkbox 1 Checked!");
-              }else{
-                  Log.d("checkbox_check", "Checkbox 1 UnChecked!");
-              }
-
-
-
-
-              //checkbox_polygon.setOnCheckedChangeListener();
-
-              //Create and display the dialog
-              final AlertDialog dialog = mBuilder.create();
-              dialog.show();
-
-              //Button with onClickListener which closes the dialog:
-              Button close_dialog = mView.findViewById(R.id.confirm_layers_dialog);
-
-              close_dialog.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View view) {
-
-                      dialog.dismiss();
-                  }
-              });
-
-          }
-      });
 
         LatLng stdView = new LatLng(34.849875, 38.869629);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stdView, 6f));
 
-        //  googleMap.addMarker(new MarkerOptions().position(new LatLng(44, 28)).title("Random marker"));
+        try {
+            layer = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(layer==null){
+
+        }
+
+
+
+        String test1 = layer.toString();
+        Log.d("String check", test1);
+
+
 
 
         setMapStyle(googleMap);
-        setupDataPoints(googleMap);
-        setupPolygon(googleMap);
+
+        layersButton(googleMap);
+        //setupDataPoints(googleMap);
+        //setupPolygon(googleMap);
 
 
 
@@ -200,19 +154,14 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         //Test map polygon functionality:
         int color_purple = 0x4d165ac7;
-        Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
-                .clickable(true)
-                .add(
+        Polygon polygon1 = googleMap.addPolygon(new PolygonOptions().clickable(true).add(
                         new LatLng(51.645, -0.138),
                         new LatLng(51.368, 0.1448),
                         new LatLng(51.483, -0.5046)));
-
         polygon1.setFillColor(color_purple);
         polygon1.setStrokeWidth(0f);
         polygon1.isClickable();
-
         googleMap.setOnPolygonClickListener(this);
-
 
     }
 
@@ -240,11 +189,88 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     }
 
-    public void setupPolygon(GoogleMap googleMap) {
+    public void layersButton(final GoogleMap googleMap){
+        Button layers_button = findViewById(R.id.layers_btn);
+        layers_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layersDialog(googleMap);
+            }
+        });
+    }
+
+    public void layersDialog(final GoogleMap googleMap){
+
+        //Creating an instance of AlertDialog
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_layers, null);  //Custom layout used for the dialog
+        mBuilder.setView(mView);
+
+        //Used to read state of checkbox
+        final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
+        boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
+        String MyValueTest = Boolean.toString(isMyValueChecked);
+        Log.d("isMyValueChecked", MyValueTest);
+
+
+        final CheckBox checkbox_polygon = mView.findViewById(R.id.dialog_layers_checkbox_polygon);
+
+        checkbox_polygon.setChecked(isMyValueChecked);
+        checkbox_polygon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //updates checkbox state
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("checkbox", ((CheckBox) view).isChecked());
+                editor.commit();
+                if(checkbox_polygon.isChecked()){
+                    Log.d("checkbox_check", "Checkbox 1 set to TRUE!");
+                    setupPolygon(googleMap, 1);
+
+
+                }else{
+                    Log.d("checkbox_check", "Checkbox 1 set to FALSE!");
+                    setupPolygon(googleMap, 0);
+
+                }
+            }
+        });
+
+        if(checkbox_polygon.isChecked()){
+            Log.d("checkbox_check", "Checkbox 1 Checked!");
+        }else{
+            Log.d("checkbox_check", "Checkbox 1 UnChecked!");
+        }
+
+
+
+
+        //Create and display the dialog
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        //Button with onClickListener which closes the dialog:
+        Button close_dialog = mView.findViewById(R.id.confirm_layers_dialog);
+
+        close_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+
+
+    public void setupPolygon(GoogleMap googleMap, int value) {
+
 
         int color_fill = 0x4d165ac7;
-        try {
-             GeoJsonLayer layer = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
+
+            // GeoJsonLayer layer = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
+
 
 
             GeoJsonPolygonStyle style = layer.getDefaultPolygonStyle();
@@ -252,15 +278,19 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             style.setStrokeColor(color_fill);
             style.setStrokeWidth(1F);
 
+                if(value==1) {
+                    layer.addLayerToMap();
+                    Log.d("checkbox_check", "LAYER ADDED");
 
-            layer.addLayerToMap();
+                }
+                else if(value==0){
+                    layer.removeLayerFromMap();
+                    Log.d("checkbox_check", "LAYER REMOVED");
+
+                }
 
 
-        } catch (IOException ex) {
-            Log.e("IOException", ex.getLocalizedMessage());
-        } catch (JSONException ex) {
-            Log.e("JSONException", ex.getLocalizedMessage());
-        }
+
 
     }
 

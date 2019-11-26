@@ -7,13 +7,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import com.conflictwatcher.Other.CSVReader;
 import com.conflictwatcher.Other.CustomInfoWindowAdapter;
@@ -43,6 +46,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
+
+
 
 
     @Override
@@ -117,6 +122,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         Button layers_button = findViewById(R.id.layers_btn);
 
+
       layers_button.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -126,6 +132,39 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
               AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapActivity.this);
               View mView = getLayoutInflater().inflate(R.layout.dialog_layers, null);  //Custom layout used for the dialog
               mBuilder.setView(mView);
+
+              //Used to read state of checkbox
+              final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
+              boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
+
+              final CheckBox checkbox_polygon = mView.findViewById(R.id.dialog_layers_checkbox_polygon);
+
+              checkbox_polygon.setChecked(isMyValueChecked);
+              checkbox_polygon.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      //updates checkbox state
+                      SharedPreferences.Editor editor = sharedPref.edit();
+                      editor.putBoolean("checkbox", ((CheckBox) view).isChecked());
+                      editor.commit();
+                      if(checkbox_polygon.isChecked()){
+                          Log.d("checkbox_check", "Checkbox 1 set to TRUE!");
+                      }else{
+                          Log.d("checkbox_check", "Checkbox 1 set to FALSE!");
+                      }
+                  }
+              });
+
+              if(checkbox_polygon.isChecked()){
+                  Log.d("checkbox_check", "Checkbox 1 Checked!");
+              }else{
+                  Log.d("checkbox_check", "Checkbox 1 UnChecked!");
+              }
+
+
+
+
+              //checkbox_polygon.setOnCheckedChangeListener();
 
               //Create and display the dialog
               final AlertDialog dialog = mBuilder.create();
@@ -137,9 +176,11 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
               close_dialog.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View view) {
+
                       dialog.dismiss();
                   }
               });
+
           }
       });
 

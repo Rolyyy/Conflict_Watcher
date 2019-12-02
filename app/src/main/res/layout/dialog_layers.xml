@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/dialog_layers"
     >
 
     <TextView
@@ -37,9 +38,9 @@
         />
 
     <CheckBox
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/dialog_layers_checkbox_polygon"
+        android:id="@+id/checkbox_polygon_syria"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -50,13 +51,35 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dialog_layers_checkbox_points"
+        android:id="@+id/checkbox_points_syria"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/dialog_layers_checkbox_polygon"
+        android:layout_toRightOf="@+id/checkbox_polygon_syria"
+        android:layout_below="@+id/dialog_layers_text"
         android:text="Syria Data Points"
         />
+
+    <CheckBox
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkbox_polygon_yemen"
+        android:layout_margin="20dp"
+        android:layout_below="@id/checkbox_polygon_syria"
+        android:text="Yemen Polygon"
+
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkbox_points_yemen"
+        android:layout_margin="20dp"
+        android:layout_below="@id/checkbox_polygon_syria"
+        android:layout_toRightOf="@id/checkbox_polygon_yemen"
+        android:text="Yemen Points"
+        />
+
 
 
 
@@ -68,8 +91,8 @@
         android:background="#ffff"
         android:text="Confirm"
         android:textStyle="bold"
-        android:layout_below="@id/dialog_layers_checkbox_points"
-        android:layout_alignEnd="@id/dialog_layers_checkbox_points"
+        android:layout_below="@id/checkbox_polygon_yemen"
+        android:layout_alignEnd="@id/checkbox_points_yemen"
         android:textColor="@color/colorPrimary"
         android:stateListAnimator="@null"
         />

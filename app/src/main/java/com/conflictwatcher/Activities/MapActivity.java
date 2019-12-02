@@ -47,7 +47,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
 
-    private GeoJsonLayer layer;
+    private GeoJsonLayer layer_syria;
+    private GeoJsonLayer layer_yemen;
 
 
 
@@ -120,31 +121,48 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        //Disables navigation button:
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
+
+
 
         LatLng stdView = new LatLng(34.849875, 38.869629);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stdView, 6f));
 
         try {
-            layer = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
+            layer_syria = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
+            layer_yemen = new GeoJsonLayer(googleMap, R.raw.yemen_geo, getApplicationContext());
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if(layer==null){
 
-        }
 
         //Checks state of layers checkbox.. if it is checked, map polygon is added
         final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-        boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
+        boolean isPolygonChecked = sharedPref.getBoolean("checkbox", false);
 
-        if(isMyValueChecked){
+        if(isPolygonChecked){
             setupPolygon(googleMap, 1);
         }
 
+        final SharedPreferences sharedPref2 = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
+        boolean isDataPointsChecked = sharedPref2.getBoolean("checkbox2", false);
 
+        if(isDataPointsChecked){
+            setupDataPoints(googleMap, 1);
+        }
+
+
+        int color_fill = 0x4d165ac7;
+        GeoJsonPolygonStyle style = layer_yemen.getDefaultPolygonStyle();
+        style.setFillColor(color_fill);
+        style.setStrokeColor(color_fill);
+        style.setStrokeWidth(1F);
+        layer_yemen.addLayerToMap();
 
 
 
@@ -221,7 +239,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         boolean isPolygonChecked = sharedPref.getBoolean("checkbox", false);
 
 
-        final CheckBox checkbox_polygon = mView.findViewById(R.id.dialog_layers_checkbox_polygon);
+        final CheckBox checkbox_polygon = mView.findViewById(R.id.checkbox_polygon_syria);
 
         checkbox_polygon.setChecked(isPolygonChecked);
         checkbox_polygon.setOnClickListener(new View.OnClickListener() {
@@ -256,7 +274,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         final SharedPreferences sharedPref2 = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
         boolean isDataPointsChecked = sharedPref2.getBoolean("checkbox2", false);
 
-        final CheckBox checkbox_points = mView.findViewById(R.id.dialog_layers_checkbox_points);
+        final CheckBox checkbox_points = mView.findViewById(R.id.checkbox_points_syria);
 
         checkbox_points.setChecked(isDataPointsChecked);
         checkbox_points.setOnClickListener(new View.OnClickListener() {
@@ -310,18 +328,18 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
 
 
-            GeoJsonPolygonStyle style = layer.getDefaultPolygonStyle();
+            GeoJsonPolygonStyle style = layer_syria.getDefaultPolygonStyle();
             style.setFillColor(color_fill);
             style.setStrokeColor(color_fill);
             style.setStrokeWidth(1F);
 
                 if(value==1) {
-                    layer.addLayerToMap();
+                    layer_syria.addLayerToMap();
                     Log.d("checkbox_check", "LAYER ADDED");
 
                 }
                 else if(value==0){
-                    layer.removeLayerFromMap();
+                    layer_syria.removeLayerFromMap();
                     Log.d("checkbox_check", "LAYER REMOVED");
 
                 }
@@ -367,7 +385,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             }
         }
         else{
-            googleMap.clear();
+            googleMap.clear(); //Might need to change this, as this also removes all polygons on map...
             final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
             boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
 

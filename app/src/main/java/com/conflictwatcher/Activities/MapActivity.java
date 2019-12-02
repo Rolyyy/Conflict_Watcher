@@ -49,6 +49,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     private GeoJsonLayer layer;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,10 +136,18 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         }
 
+        //Checks state of layers checkbox.. if it is checked, map polygon is added
+        final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
+        boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
+
+        if(isMyValueChecked){
+            setupPolygon(googleMap, 1);
+        }
 
 
-        String test1 = layer.toString();
-        Log.d("String check", test1);
+
+
+
 
 
 
@@ -208,14 +218,12 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         //Used to read state of checkbox
         final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-        boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
-        String MyValueTest = Boolean.toString(isMyValueChecked);
-        Log.d("isMyValueChecked", MyValueTest);
+        boolean isPolygonChecked = sharedPref.getBoolean("checkbox", false);
 
 
         final CheckBox checkbox_polygon = mView.findViewById(R.id.dialog_layers_checkbox_polygon);
 
-        checkbox_polygon.setChecked(isMyValueChecked);
+        checkbox_polygon.setChecked(isPolygonChecked);
         checkbox_polygon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -241,6 +249,35 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         }else{
             Log.d("checkbox_check", "Checkbox 1 UnChecked!");
         }
+
+
+
+
+        final SharedPreferences sharedPref2 = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
+        boolean isDataPointsChecked = sharedPref2.getBoolean("checkbox2", false);
+
+        final CheckBox checkbox_points = mView.findViewById(R.id.dialog_layers_checkbox_points);
+
+        checkbox_points.setChecked(isDataPointsChecked);
+        checkbox_points.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //updates checkbox state
+                SharedPreferences.Editor editor = sharedPref2.edit();
+                editor.putBoolean("checkbox2", ((CheckBox) view).isChecked());
+                editor.commit();
+                if(checkbox_points.isChecked()){
+                    Log.d("checkbox_check", "Checkbox 2 set to TRUE!");
+                    setupDataPoints(googleMap, 1);
+
+
+                }else{
+                    Log.d("checkbox_check", "Checkbox 2 set to FALSE!");
+                    setupDataPoints(googleMap, 0);
+
+                }
+            }
+        });
 
 
 
@@ -295,37 +332,50 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     }
 
 
-    public void setupDataPoints(GoogleMap googleMap) {
+    public void setupDataPoints(GoogleMap googleMap, int value) {
 
-        //CSV Start
-        List<String[]> rows = new ArrayList<>();
-        CSVReader csvReader = new CSVReader(MapActivity.this, "201910syria.csv");
-        try {
-            rows = csvReader.readCSV();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Log.d("setupMethodStart", String.valueOf(value));
+        if(value==1) {
+
+            //CSV Start
+            List<String[]> rows = new ArrayList<>();
+            CSVReader csvReader = new CSVReader(MapActivity.this, "201910syria.csv");
+            try {
+                rows = csvReader.readCSV();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker);
+
+            googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this)); //Set the info window to the custom one created
+
+            /// !!!
+            /// IF my database format changes, this loop has to be reformatted!
+            double myLat;
+            double myLong;
+            String data_info;
+
+            for (int i = 0; i < rows.size(); i++) {
+                myLat = Double.valueOf(rows.get(i)[22]);
+                myLong = Double.valueOf(rows.get(i)[23]);
+                data_info = "Date: " + rows.get(i)[4] + "  Event: " + rows.get(i)[8];
+
+                Log.d("mydatainfo", data_info);
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).icon(icon).title("title")).setSnippet(data_info);
+
+            }
         }
+        else{
+            googleMap.clear();
+            final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
+            boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
 
-        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker);
-
-        googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this)); //Set the info window to the custom one created
-
-        /// !!!
-        /// IF my database format changes, this loop has to be reformatted!
-        double myLat;
-        double myLong;
-        String data_info;
-
-        for (int i = 0; i < rows.size(); i++) {
-            myLat = Double.valueOf(rows.get(i)[22]);
-            myLong = Double.valueOf(rows.get(i)[23]);
-            data_info = "Date: " + rows.get(i)[4] + "  Event: " + rows.get(i)[8];
-
-            Log.d("mydatainfo", data_info);
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).icon(icon).title("title")).setSnippet(data_info);
+            if(isMyValueChecked){
+                setupPolygon(googleMap, 1);
+            }
 
         }
-
 
     }
 }

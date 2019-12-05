@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,6 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
+import com.conflictwatcher.MyItem;
 import com.conflictwatcher.Other.CSVReader;
 import com.conflictwatcher.Other.CustomInfoWindowAdapter;
 import com.conflictwatcher.R;
@@ -27,13 +31,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.maps.android.clustering.Cluster;
+import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.data.Feature;
+import com.google.maps.android.data.Layer;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
@@ -49,6 +60,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     private GeoJsonLayer layer_syria;
     private GeoJsonLayer layer_yemen;
+
+    private ClusterManager<MyItem> mClusterManager;
 
 
 
@@ -133,12 +146,9 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             layer_syria = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
             layer_yemen = new GeoJsonLayer(googleMap, R.raw.yemen_geo, getApplicationContext());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-
 
 
         //Checks state of layers checkbox.. if it is checked, map polygon is added
@@ -157,24 +167,15 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         }
 
 
-        int color_fill = 0x4d165ac7;
-        GeoJsonPolygonStyle style = layer_yemen.getDefaultPolygonStyle();
-        style.setFillColor(color_fill);
-        style.setStrokeColor(color_fill);
-        style.setStrokeWidth(1F);
-        layer_yemen.addLayerToMap();
 
 
-
-         final SharedPreferences sharedPrefYemenPolygon = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-         boolean isYemenPolygonChecked = sharedPrefYemenPolygon.getBoolean("checkbox3", false);
+        final SharedPreferences sharedPrefYemenPolygon = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
+        boolean isYemenPolygonChecked = sharedPrefYemenPolygon.getBoolean("checkbox3", false);
 
         if(isYemenPolygonChecked){
+
             setupPolygon(googleMap, 1, layer_yemen);
         }
-
-
-
 
         setMapStyle(googleMap);
 
@@ -202,7 +203,11 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onPolygonClick(Polygon polygon) {
         Toast.makeText(MapActivity.this, "Polygon Clicked!", Toast.LENGTH_SHORT).show();
-
+        /*
+        String text1 = polygon.getId();
+        //String text2 = polygon.getTag();
+        Log.d("PolygonLog", text1);
+        */
 
     }
 
@@ -365,6 +370,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
                 if(value==1) {
                     layer_choice.addLayerToMap();
+
+
                     Log.d("checkbox_check", "LAYER ADDED");
 
                 }
@@ -378,6 +385,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
 
     }
+
+
 
 
     public void setupDataPoints(GoogleMap googleMap, int value) {
@@ -394,28 +403,61 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 e.printStackTrace();
             }
 
-            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker);
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker_blue);
+
+
+
+
+
+
+            mClusterManager = new ClusterManager<>(this, googleMap);
+            googleMap.setOnCameraIdleListener(mClusterManager);
+            googleMap.setOnMarkerClickListener(mClusterManager);
 
             googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapActivity.this)); //Set the info window to the custom one created
 
+            double myLat, myLong;
+            String title, snippet;
             /// !!!
             /// IF my database format changes, this loop has to be reformatted!
-            double myLat;
-            double myLong;
-            String data_info;
-
             for (int i = 0; i < rows.size(); i++) {
                 myLat = Double.valueOf(rows.get(i)[22]);
                 myLong = Double.valueOf(rows.get(i)[23]);
-                data_info = "Date: " + rows.get(i)[4] + "  Event: " + rows.get(i)[8];
+                title = "Date :  " + rows.get(i)[4] + "\n" +  "Event :  " + rows.get(i)[8];
+                snippet = rows.get(i)[27];
+                // participants ="Actors :  " + rows.get(i)[9] + "\n" + "and :  " + rows.get(i)[12];
 
-                Log.d("mydatainfo", data_info);
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).icon(icon).title("title")).setSnippet(data_info);
 
+                //googleMap.addMarker(new MarkerOptions().position(new LatLng(myLat, myLong)).icon(icon).title("title")).setSnippet(data_info);
+
+                MyItem infoWindowItem = new MyItem(myLat, myLong, title, snippet);
+                mClusterManager.addItem(infoWindowItem);
             }
+
+            double currentLat = googleMap.getCameraPosition().target.latitude;
+            double currentLong = googleMap.getCameraPosition().target.longitude;
+            float currentZoom = googleMap.getCameraPosition().zoom;
+            LatLng stdView = new LatLng(currentLat, currentLong);
+
+            //updates view with current camera coordinates and zoom level, as otherwise clusters wouldn't appear until user manually changes zoom level
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stdView, currentZoom));
+
+            //when a cluster is clicked, nothing is done:
+            mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<MyItem>() {
+                @Override
+                public boolean onClusterClick(Cluster<MyItem> cluster) {
+                    return true;
+                }
+
+            });
+
+
         }
         else{
             googleMap.clear(); //Might need to change this, as this also removes all polygons on map...
+            mClusterManager.clearItems();
+
+
             final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
             boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
 
@@ -427,6 +469,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             if(isMyValueChecked2){
                 setupPolygon(googleMap, 1, layer_yemen);
             }
+
         }
 
     }

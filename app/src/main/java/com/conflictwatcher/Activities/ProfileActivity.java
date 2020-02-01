@@ -98,11 +98,13 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 finish();
                 break;
             case R.id.nav_events:
-                Toast.makeText(this, "Events", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(ProfileActivity.this, EventsActivity.class));
+                finish();
 
                 break;
             case R.id.nav_info:
-                Toast.makeText(this, "Info", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ProfileActivity.this, ConflictsActivity.class));
+                finish();
 
                 break;
 

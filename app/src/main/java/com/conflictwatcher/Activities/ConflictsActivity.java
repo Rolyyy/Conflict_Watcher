@@ -15,16 +15,18 @@ import android.widget.Toast;
 import com.conflictwatcher.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class EventsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ConflictsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
 
     private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_events);
+        setContentView(R.layout.activity_conflicts);
         setupNav(savedInstanceState);
     }
+
 
     private void setupNav(Bundle savedInstanceState) {
 
@@ -39,7 +41,7 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            navigationView.setCheckedItem(R.id.nav_events);
+            navigationView.setCheckedItem(R.id.nav_info);
         }
 
 
@@ -49,25 +51,24 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_map:
-                startActivity(new Intent(EventsActivity.this, MapActivity.class));
+                startActivity(new Intent(ConflictsActivity.this, MapActivity.class));
                 finish();
 
                 break;
 
 
             case R.id.nav_events:
-               // startActivity(new Intent(EventsActivity.this, EventsActivity.class));
-              //  finish();
+                startActivity(new Intent(ConflictsActivity.this, EventsActivity.class));
+                finish();
 
                 break;
             case R.id.nav_info:
-                startActivity(new Intent(EventsActivity.this, ConflictsActivity.class));
-                finish();
+               //current activity
 
                 break;
 
             case R.id.nav_profile:
-                startActivity(new Intent(EventsActivity.this, ProfileActivity.class));
+                startActivity(new Intent(ConflictsActivity.this, ProfileActivity.class));
                 finish();
 
 
@@ -77,5 +78,4 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

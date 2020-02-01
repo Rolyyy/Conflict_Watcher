@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.SettingsActivity"></activity>
+        <activity android:name=".Activities.ConflictsActivity"></activity>
+        <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.ProfileActivity" />
         <activity android:name=".Activities.EventsActivity" />
         <activity android:name=".Activities.LoginReg.ForgotPasswordActivity" />

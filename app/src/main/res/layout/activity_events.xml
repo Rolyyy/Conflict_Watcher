@@ -38,6 +38,18 @@
 
     </FrameLayout>
 
+    <!--ListView for events-->
+    <ListView
+        android:paddingTop="35dp"
+        android:layout_marginTop="35dp"
+        android:id="@+id/eventsListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="2dp"
+        android:divider=" #6f8dad "
+        android:listSelector="#9ec8f5"
+        />
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

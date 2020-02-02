@@ -10,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.conflictwatcher.R;
@@ -19,11 +21,22 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
 
     private DrawerLayout drawerLayout;
 
+
+    ListView myList;
+    String cityList[] = {"London", "Paris", "Rome", "Vienna", "Budapest", "Belgrade" , "Paris", "Rome", "Vienna", "Budapest" , "Paris", "Rome", "Vienna", "Budapest" , "Paris", "Rome", "Vienna", "Budapest"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
         setupNav(savedInstanceState);
+
+
+        myList = findViewById(R.id.eventsListView);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, R.layout.activity_listview, R.id.textView, cityList);
+        myList.setAdapter(arrayAdapter);
+
+
     }
 
     private void setupNav(Bundle savedInstanceState) {

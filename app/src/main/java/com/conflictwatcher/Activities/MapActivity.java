@@ -461,6 +461,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         } else {
             googleMap.clear(); //Might need to change this, as this also removes all polygons on map...
             mClusterManager.clearItems();
+            //clearItems removes all polygons... remove this, as selectable polygon dialog window is not needed
+
 
 
             final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);

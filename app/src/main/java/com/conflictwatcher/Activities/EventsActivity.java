@@ -14,8 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.conflictwatcher.Other.CSVReader;
 import com.conflictwatcher.R;
 import com.google.android.material.navigation.NavigationView;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,7 +28,7 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
 
 
     ListView myList;
-    String cityList[] = {"London", "Paris", "Rome", "Vienna", "Budapest", "Belgrade" , "Paris", "Rome", "Vienna", "Budapest" , "Paris", "Rome", "Vienna", "Budapest" , "Paris", "Rome", "Vienna", "Budapest"};
+    ArrayList eventsList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +36,27 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.activity_events);
         setupNav(savedInstanceState);
 
+        //CSV Start
+        List<String[]> rows = new ArrayList<>();
+        CSVReader csvReader = new CSVReader(EventsActivity.this, "201910syria.csv");
+        try {
+            rows = csvReader.readCSV();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String title, event, snippet;
+        for (int i = 0; i < rows.size(); i++) {
+            title = "Date :  " + rows.get(i)[4];
+            event = "Event :  " + rows.get(i)[8];
+            snippet = rows.get(i)[27];
+            eventsList.add(title + "\n" + event + "\n" + "\n" + snippet);
+        }
+
+
 
         myList = findViewById(R.id.eventsListView);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, R.layout.activity_listview, R.id.textView, cityList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, R.layout.activity_listview, R.id.listText1, eventsList);
         myList.setAdapter(arrayAdapter);
 
 

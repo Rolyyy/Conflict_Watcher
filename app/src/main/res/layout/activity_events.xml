@@ -41,7 +41,6 @@
     <!--ListView for events-->
     <ListView
         android:paddingTop="35dp"
-        android:layout_marginTop="35dp"
         android:id="@+id/eventsListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

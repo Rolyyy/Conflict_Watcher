@@ -11,7 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Listview"></activity>
+        <activity android:name=".Conflicts.ConflictKurdTurk"></activity>
+        <activity android:name=".Conflicts.ConflictMexico" />
+        <activity android:name=".Conflicts.ConflictLibya" />
+        <activity android:name=".Conflicts.ConflictIraq" />
+        <activity android:name=".Conflicts.ConflictSomali" />
+        <activity android:name=".Conflicts.ConflictYemen" />
+        <activity android:name=".Conflicts.ConflictAfghan" />
+        <activity
+            android:name=".Conflicts.ConflictSyria"
+            android:label="@string/title_activity_conflict_syria"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Listview" />
         <activity android:name=".Activities.ConflictsActivity" />
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.ProfileActivity" />

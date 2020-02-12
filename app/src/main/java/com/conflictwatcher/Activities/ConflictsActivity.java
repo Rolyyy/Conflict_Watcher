@@ -10,10 +10,23 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.conflictwatcher.Conflicts.ConflictAfghan;
+import com.conflictwatcher.Conflicts.ConflictIraq;
+import com.conflictwatcher.Conflicts.ConflictKurdTurk;
+import com.conflictwatcher.Conflicts.ConflictLibya;
+import com.conflictwatcher.Conflicts.ConflictMexico;
+import com.conflictwatcher.Conflicts.ConflictSomali;
+import com.conflictwatcher.Conflicts.ConflictSyria;
+import com.conflictwatcher.Conflicts.ConflictYemen;
 import com.conflictwatcher.R;
 import com.google.android.material.navigation.NavigationView;
+
+import org.w3c.dom.Text;
 
 public class ConflictsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -25,6 +38,73 @@ public class ConflictsActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conflicts);
         setupNav(savedInstanceState);
+
+
+        Button syriaButton = findViewById(R.id.act_conflict_syria);
+        syriaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictSyria.class));
+            }
+        });
+
+        Button yemenButton = findViewById(R.id.act_conflict_yemen);
+        yemenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictYemen.class));
+            }
+        });
+
+        Button iraqButton = findViewById(R.id.act_conflict_iraq);
+        iraqButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictIraq.class));
+            }
+        });
+
+        Button afghanButton = findViewById(R.id.act_conflict_afghan);
+        afghanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictAfghan.class));
+            }
+        });
+
+        Button libyaButton = findViewById(R.id.act_conflict_libya);
+        libyaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictLibya.class));
+            }
+        });
+
+        Button somaliButton = findViewById(R.id.act_conflict_somali);
+        somaliButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictSomali.class));
+            }
+        });
+
+        Button kurdturkButton = findViewById(R.id.act_conflict_kurd_turk);
+        kurdturkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictKurdTurk.class));
+            }
+        });
+
+        Button mexicoButton = findViewById(R.id.act_conflict_mexico);
+        mexicoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ConflictsActivity.this, ConflictMexico.class));
+            }
+        });
+
+
     }
 
 

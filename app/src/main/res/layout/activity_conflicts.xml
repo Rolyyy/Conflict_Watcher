@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+   
     android:fitsSystemWindows="true"
     android:id="@+id/layout_drawer">
 
@@ -36,7 +36,134 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+
     </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="35dp"
+        >
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/act_conflict_title"
+            android:text="Some text goes here"
+            android:layout_margin="5dp"
+            />
+
+        <Button
+
+            android:id="@+id/act_conflict_syria"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/act_conflict_title"
+            android:text="Syrian Civil War"
+            android:layout_margin="15dp"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+
+            />
+
+        <Button
+            android:id="@+id/act_conflict_yemen"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="Yemeni Crisis"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:layout_below="@+id/act_conflict_syria"
+            android:layout_margin="15dp"
+
+            />
+
+        <Button
+            android:id="@+id/act_conflict_afghan"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="Afghanistan Conflict"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/act_conflict_syria"
+            android:layout_margin="15dp"
+            android:layout_below="@+id/act_conflict_title"
+            />
+
+        <Button
+            android:id="@+id/act_conflict_mexico"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="Mexican Drug War"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/act_conflict_yemen"
+            android:layout_margin="15dp"
+            android:layout_below="@+id/act_conflict_afghan"
+            />
+
+        <Button
+            android:id="@+id/act_conflict_somali"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="Somali Civil War"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:layout_margin="15dp"
+            android:layout_below="@+id/act_conflict_yemen"
+            />
+
+        <Button
+            android:id="@+id/act_conflict_iraq"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="Iraq Conflict"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/act_conflict_somali"
+            android:layout_margin="15dp"
+            android:layout_below="@+id/act_conflict_mexico"
+            />
+
+        <Button
+            android:id="@+id/act_conflict_libya"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="Libyan Civil War"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:layout_margin="15dp"
+            android:layout_below="@+id/act_conflict_somali"
+            />
+
+        <Button
+            android:id="@+id/act_conflict_kurd_turk"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="Kurd-Turk Conflict"
+            android:background="@drawable/themed_button"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/act_conflict_libya"
+            android:layout_margin="15dp"
+            android:layout_below="@+id/act_conflict_iraq"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

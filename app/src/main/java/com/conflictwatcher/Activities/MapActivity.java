@@ -69,6 +69,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private ClusterManager<MyItem> mClusterManager;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,10 +148,11 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         LatLng stdView = new LatLng(24.367114, 44.472656);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stdView, 4f));
 
+
+
         try {
             layer_syria = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
             layer_yemen = new GeoJsonLayer(googleMap, R.raw.yemen_geo, getApplicationContext());
-
             layer_afghan = new GeoJsonLayer(googleMap, R.raw.afghan_geo, getApplicationContext());
             layer_iraq = new GeoJsonLayer(googleMap, R.raw.iraq_geo, getApplicationContext());
             layer_somali = new GeoJsonLayer(googleMap, R.raw.somali_geo, getApplicationContext());
@@ -161,40 +163,34 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             e.printStackTrace();
         }
 
+        setupPolygon(googleMap, layer_afghan);
+        setupPolygon(googleMap, layer_iraq);
+        setupPolygon(googleMap, layer_somali);
+        setupPolygon(googleMap, layer_libya);
+        setupPolygon(googleMap, layer_mexico);
+        setupPolygon(googleMap, layer_syria);
+        setupPolygon(googleMap, layer_yemen);
 
-        setupPolygon(googleMap, 1, layer_afghan);
-        setupPolygon(googleMap, 1, layer_iraq);
-        setupPolygon(googleMap, 1, layer_somali);
-        setupPolygon(googleMap, 1, layer_libya);
-        setupPolygon(googleMap, 1, layer_mexico);
 
 
-        //Checks state of layers checkbox.. if it is checked, map polygon is added
-        final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-        boolean isPolygonChecked = sharedPref.getBoolean("checkbox", false);
 
-        if (isPolygonChecked) {
-            setupPolygon(googleMap, 1, layer_syria);
-        }
 
         final SharedPreferences sharedPref2 = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
         boolean isDataPointsChecked = sharedPref2.getBoolean("checkbox2", false);
 
+        /*
         if (isDataPointsChecked) {
-            setupDataPoints(googleMap, 1);
+            setupDataPoints(googleMap, 1, "201910syria.csv");
         }
+        */
+
+        mClusterManager = new ClusterManager<>(this, googleMap);
+        setupDataPoints(googleMap, 1, "202002yemen.csv");
+        setupDataPoints(googleMap, 1, "201910syria.csv");
 
 
-        final SharedPreferences sharedPrefYemenPolygon = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-        boolean isYemenPolygonChecked = sharedPrefYemenPolygon.getBoolean("checkbox3", false);
-
-        if (isYemenPolygonChecked) {
-
-            setupPolygon(googleMap, 1, layer_yemen);
-        }
 
         setMapStyle(googleMap);
-
         layersButton(googleMap);
         //setupDataPoints(googleMap);
         //setupPolygon(googleMap);
@@ -260,33 +256,6 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         mBuilder.setView(mView);
 
 
-        //Used to read state of checkbox
-        final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-        boolean isPolygonChecked = sharedPref.getBoolean("checkbox", false);
-
-        final CheckBox checkbox_polygon = mView.findViewById(R.id.checkbox_polygon_syria);
-
-        checkbox_polygon.setChecked(isPolygonChecked);
-        checkbox_polygon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //updates checkbox state
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean("checkbox", ((CheckBox) view).isChecked());
-                editor.commit();
-                if (checkbox_polygon.isChecked()) {
-                    Log.d("checkbox_check", "Checkbox 1 set to TRUE!");
-                    setupPolygon(googleMap, 1, layer_syria);
-
-
-                } else {
-                    Log.d("checkbox_check", "Checkbox 1 set to FALSE!");
-                    setupPolygon(googleMap, 0, layer_syria);
-
-                }
-            }
-        });
-
 
         final SharedPreferences sharedPref2 = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
         boolean isDataPointsChecked = sharedPref2.getBoolean("checkbox2", false);
@@ -303,43 +272,19 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 editor.commit();
                 if (checkbox_points.isChecked()) {
                     Log.d("checkbox_check", "Checkbox 2 set to TRUE!");
-                    setupDataPoints(googleMap, 1);
+                    setupDataPoints(googleMap, 1, "201910syria.csv");
 
 
                 } else {
                     Log.d("checkbox_check", "Checkbox 2 set to FALSE!");
-                    setupDataPoints(googleMap, 0);
+                    setupDataPoints(googleMap, 0, "201910syria.csv");
 
                 }
             }
         });
 
 
-        final SharedPreferences sharedPref3 = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-        boolean isYemenPolygonChecked = sharedPref3.getBoolean("checkbox3", false);
 
-        final CheckBox yemen_checkbox_polygon = mView.findViewById(R.id.checkbox_polygon_yemen);
-
-        yemen_checkbox_polygon.setChecked(isYemenPolygonChecked);
-        yemen_checkbox_polygon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //updates checkbox state
-                SharedPreferences.Editor editor = sharedPref3.edit();
-                editor.putBoolean("checkbox3", ((CheckBox) view).isChecked());
-                editor.commit();
-                if (yemen_checkbox_polygon.isChecked()) {
-                    Log.d("checkbox_check", "Checkbox 3 set to TRUE!");
-                    setupPolygon(googleMap, 1, layer_yemen);
-
-
-                } else {
-                    Log.d("checkbox_check", "Checkbox 3 set to FALSE!");
-                    setupPolygon(googleMap, 0, layer_yemen);
-
-                }
-            }
-        });
 
 
         //Create and display the dialog
@@ -360,43 +305,41 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     }
 
 
-    public void setupPolygon(GoogleMap googleMap, int value, GeoJsonLayer layer_choice) {
+    public void setupPolygon(GoogleMap googleMap, GeoJsonLayer layer_choice) {
 
 
         int color_fill = 0x4d165ac7;
 
         // GeoJsonLayer layer = new GeoJsonLayer(googleMap, R.raw.syria_geo, getApplicationContext());
 
-
         GeoJsonPolygonStyle style = layer_choice.getDefaultPolygonStyle();
         style.setFillColor(color_fill);
         style.setStrokeColor(color_fill);
         style.setStrokeWidth(1F);
 
-        if (value == 1) {
-            layer_choice.addLayerToMap();
-
-
-            Log.d("checkbox_check", "LAYER ADDED");
-
-        } else if (value == 0) {
-            layer_choice.removeLayerFromMap();
-            Log.d("checkbox_check", "LAYER REMOVED");
-
-        }
+        layer_choice.addLayerToMap();
 
 
     }
 
 
-    public void setupDataPoints(GoogleMap googleMap, int value) {
+    public void setupDataPoints(GoogleMap googleMap, int value, String file) {
 
+        /*
+        String choice;
+        if (name == "syria"){
+            choice = "mClusterManagerSyria";
+        }
+        if (name == "yemen"){
+            choice = "mClusterManagerYemen";
+        }
+        */
         Log.d("setupMethodStart", String.valueOf(value));
         if (value == 1) {
 
             //CSV Start
             List<String[]> rows = new ArrayList<>();
-            CSVReader csvReader = new CSVReader(MapActivity.this, "201910syria.csv");
+            CSVReader csvReader = new CSVReader(MapActivity.this, file);
             try {
                 rows = csvReader.readCSV();
             } catch (IOException e) {
@@ -406,7 +349,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker_blue);
 
 
-            mClusterManager = new ClusterManager<>(this, googleMap);
+
+
             googleMap.setOnCameraIdleListener(mClusterManager);
             googleMap.setOnMarkerClickListener(mClusterManager);
 
@@ -465,17 +409,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
 
 
-            final SharedPreferences sharedPref = MapActivity.this.getPreferences(Context.MODE_PRIVATE);
-            boolean isMyValueChecked = sharedPref.getBoolean("checkbox", false);
 
-            if (isMyValueChecked) {
-                setupPolygon(googleMap, 1, layer_syria);
-            }
-
-            boolean isMyValueChecked2 = sharedPref.getBoolean("checkbox3", false);
-            if (isMyValueChecked2) {
-                setupPolygon(googleMap, 1, layer_yemen);
-            }
 
         }
 

@@ -4,95 +4,54 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_conflict_syria">ConflictSyria</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
+    <string name="syria_text_1">
+        The Syrian Civil war is a currently ongoing civil war fought in Syria between multiple sides. This conflict originated from the wide wave of Arab Spring protests in 2011. These protests grew out of dissatisfaction
+        with the Syrian Government, and it has massively escalated after the Government violently suppressed the protests demanding removal of the president, Bashar Al-Assad. \n\n
 
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
+        The conflict has been ongoing since early 2011, and is currently the second deadliest in the 21st century. This conflict is especially of importance due to the large number of outside actors that are investing military manpower,
+        and financially supporting various factions. In effect, the Syrian Civil War is another proxy war with various countries around the world contributing to it.
 
-        "Bold, graphic, intentional.\n\n"
+    </string>
+    <string name="syria_text_2">There are 4 main belligerents in this war, with each having various support from other countries: \n\n
+         Syrian Arab Republic:\n Known as the Government &amp; Pro-Assad forces. They recognise Bashar Al-Assad and his government as the rightful leaders of Syria. Pro-Assad forces are fighting to preserve Assad as president,
+        and claim the whole of Syria as theirs. Their main external supporters are Russia, Iran and various Shia Islamist groups. \n\n
 
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
+        Rebel Forces:\n This comprises various groups that are against the Assad government. There are many organisations within this, such as moderate groups, and Sunni Jihadist groups such as Ahrar al-Sham and HTS(Hayat Tahrir Al-Sham).
+        These groups believe in the establishment of a state based on a strict interpretation of Sunni Islam and claim to be religiously oppressed by the Assad Regime.\n
+         Each of these rebel groups has various supporters including Turkey, Qatar, Saudi Arabia and The United States.\n\n
 
-        "Motion provides meaning.\n\n"
+        Islamic State of Iraq and Levant: \n
+        Known by its various names including ISIS, ISIL, Daesh or simply IS(Islamic State), is a militant group which follows a hard line salafi jihadist doctrine of Sunni Islam. They established an Islamic Caliphate during 2014
+        and very notorious for their propaganda videos and actions against anyone it deemed to be their enemy. IS fought actively against every side in this war, even other Sunni jihadist groups. As of 2020 virtully all of their territory
+        has been recaptured and they only operate as an underground terrorist organisation.\n
+        The Islamic State doesn\'t have any official state support, but a large number of people moved to Syria and Iraq to fight for the group. \n\n
 
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
 
-        "3D world.\n\n"
+        Rojava: \n
+        Rojava, or the SDF(Syrian Democratic Forces) is an alliance of primarily Kurdish, Arab and Syyrian militias, fighting to create a democratic and secular Syria. They primarily fought against IS, successfuly dirving them out of
+        large parts of Syria, with the help of Coalition Forces. However, many groups are hostile towards them, including Turkey and Syrian Rebel groups. The SDF has not actively fought against the Syrian Government apart from minor clashes.\n
+        Their main supporters are the CJTF-OIR, an international coalition including the USA, France and UK amongst many others.
 
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+
+    <string name="syria_text_3">The toll on human life in the war has been staggering. Since the beginning, an estimated 570,000 people have died as a result. The war is still seeing significant battles, as the month of January 2020
+        saw 1,200 fatalities. There has also been a vast refugee crisis, with more than 6 million people internally displaced, and 5 million fleeing to other countries.\n\n
+
+    The economy of the country has  been devastated  due to the war, also because of sanctions, such as from the US Government. While this is intended to impede the Syrian Government\'s power and authority, it can have a negative effect to
+        the people of Syria. It can decrease their economic resources, and increase their reliance on the government.\n\n
+
+    In 2018, the World Bank estimated that about half of the country\'s health and education facilities, and a third of it\'s housing stock has been destroyed by the conflict. An estimated $226 million in GDP has been lost due to the conflict,
+        only between 2011 and 2016.
+    </string>
+    <string name="syria_text_4">As of 2020, there is still active fighting between the Government and rebels, and between the SDF and rebels and Turkey. There have been many initiatitives to broker a peacefire, but they either
+        fail or do not last.\n\n
+
+        However, with the Syrian Government and SDF controlling the majority of the country, and their relative neutrality against each other, there is a lack of active fighting in the majority of the country. The Government and SDF is
+        currently in negotiation in order to reach a solution between the two entities.
+
+
+
+    </string>
 
 </resources>

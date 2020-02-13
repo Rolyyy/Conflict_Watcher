@@ -6,21 +6,122 @@
     android:layout_height="match_parent"
     tools:context=".Conflicts.ConflictSyria">
 
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/act_conflict_title"
+        android:text="Syrian Civil War"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        />
+
+
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-
+        android:layout_below="@+id/act_conflict_title"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         >
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Overview"
+            android:id="@+id/syria_heading_1"
+            android:textSize="17sp"
+            android:layout_marginTop="16dp"
+            />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/large_text"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/syria_heading_1"
+            android:text="@string/syria_text_1"
+            android:id="@+id/text1"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Who is fighting &amp; why?"
+            android:textSize="17sp"
+            android:id="@+id/syria_heading_2"
+            android:layout_below="@+id/text1"
+            android:layout_marginTop="16dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/syria_text_2"
+            android:id="@+id/syria_text_2"
+            android:layout_below="@id/syria_heading_2"
+            android:layout_marginTop="8dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Effects on population, economy &amp; infrastucture"
+            android:textSize="17sp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/syria_text_2"
+            android:id="@+id/syria_heading_3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/syria_text_3"
+            android:id="@+id/syria_text_3"
+            android:layout_below="@id/syria_heading_3"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Potential solutions?"
+            android:textSize="17sp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/syria_heading_4"
+            android:layout_below="@id/syria_text_3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/syria_text_4"
+            android:id="@+id/syria_text_4"
+            android:layout_below="@+id/syria_heading_4"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            />
+
+
+
+        </RelativeLayout>
+
     </androidx.core.widget.NestedScrollView>
+
+
+
 
 </RelativeLayout>

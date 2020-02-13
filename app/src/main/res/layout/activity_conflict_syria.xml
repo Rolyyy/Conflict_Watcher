@@ -7,6 +7,18 @@
     tools:context=".Conflicts.ConflictSyria">
 
 
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:id="@+id/syria_button_back"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:paddingStart="10dp"
+        android:background="@drawable/themed_button"
+        android:textSize="10sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,10 +26,11 @@
         android:id="@+id/act_conflict_title"
         android:text="Syrian Civil War"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
+        android:layout_toRightOf="@id/syria_button_back"
         />
 
 

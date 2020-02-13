@@ -53,5 +53,10 @@
 
 
     </string>
+    <string name="activity_conflicts_text">Armed conflicts are hositlities that involve governments, militias and other armed groups. This application focuses on some of the most significant conflicts around the world.
+        These are all conflicts which had more than 1000 deaths in 2019, and are considered to be "wars" by the Uppsala conflict Data Program. The buttons below allow you to learn about these conflicts, and the
+        effects they had on countries:
+
+    </string>
 
 </resources>

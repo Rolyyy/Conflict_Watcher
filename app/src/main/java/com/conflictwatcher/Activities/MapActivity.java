@@ -46,11 +46,13 @@ import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.Layer;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonPolygon;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnPolygonClickListener {
@@ -163,6 +165,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             e.printStackTrace();
         }
 
+
+
         setupPolygon(googleMap, layer_afghan);
         setupPolygon(googleMap, layer_iraq);
         setupPolygon(googleMap, layer_somali);
@@ -212,11 +216,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onPolygonClick(Polygon polygon) {
         Toast.makeText(MapActivity.this, "Polygon Clicked!", Toast.LENGTH_SHORT).show();
-        /*
+
         String text1 = polygon.getId();
-        //String text2 = polygon.getTag();
-        Log.d("PolygonLog", text1);
-        */
 
     }
 
@@ -318,6 +319,12 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         style.setStrokeWidth(1F);
 
         layer_choice.addLayerToMap();
+
+
+
+
+
+
 
 
     }

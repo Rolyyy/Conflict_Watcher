@@ -2,7 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:id="@+id/layout_drawer">
 
@@ -36,7 +35,7 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    </FrameLayout>
+
 
     <!--ListView for events-->
     <ListView
@@ -48,6 +47,8 @@
         android:divider=" #6f8dad "
         android:listSelector="#9ec8f5"
         />
+
+    </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

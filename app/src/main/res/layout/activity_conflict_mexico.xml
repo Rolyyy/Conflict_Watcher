@@ -6,13 +6,148 @@
     android:layout_height="match_parent"
     tools:context=".Conflicts.ConflictMexico">
 
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/lower_toolbar"
+        />
+
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:id="@+id/mexico_button_back"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:paddingStart="10dp"
+        android:textSize="10sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/act_conflict_title"
         android:text="Mexican Drug War"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="22sp"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/mexico_button_back"
         />
+
+
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/lower_toolbar"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+
+
+        >
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Overview"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/heading_1"
+                android:textSize="17sp"
+                android:layout_marginTop="16dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/heading_1"
+                android:text="@string/mexico_text_1"
+                android:id="@+id/text1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Who is fighting &amp; why?"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp"
+                android:id="@+id/heading_2"
+                android:layout_below="@+id/text1"
+                android:layout_marginTop="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mexico_text_2"
+                android:id="@+id/text_2"
+                android:layout_below="@id/heading_2"
+                android:layout_marginTop="8dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Effects on population, economy &amp; infrastructure"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp"
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/text_2"
+                android:id="@+id/heading_3"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mexico_text_3"
+                android:id="@+id/text_3"
+                android:layout_below="@id/heading_3"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Potential solutions?"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp"
+                android:layout_marginTop="16dp"
+                android:id="@+id/heading_4"
+                android:layout_below="@id/text_3"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mexico_text_4"
+                android:id="@+id/text_4"
+                android:layout_below="@+id/heading_4"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                />
+
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

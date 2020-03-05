@@ -32,7 +32,7 @@
         large parts of Syria, with the help of Coalition Forces. However, many groups are hostile towards them, including Turkey and Syrian Rebel groups. The SDF has not actively fought against the Syrian Government apart from minor clashes.\n
         Their main supporters are the CJTF-OIR, an international coalition including the USA, France and UK amongst many others. \n\n
 
-        The diagram below shows an outline of the different groups involved in the war and how they relate to each other. Note that \'Jabhat Fateh al Sham\' is the group known as HTS/ Al-Qaeda in Syria.
+        The diagram below shows an outline of the different groups involved in the war and how they relate to each other. Note that \'Jabhat Fateh al Sham\' is the former name for the group known as HTS/ Al-Qaeda in Syria.
 
     </string>
     <string name="action_settings">Settings</string>
@@ -51,14 +51,21 @@
 
         However, with the Syrian Government and SDF controlling the majority of the country, and their relative neutrality against each other, there is a lack of active fighting in the majority of the country. The Government and SDF is
         currently in negotiation in order to reach a solution between the two entities.
-
-
-
     </string>
     <string name="activity_conflicts_text">Armed conflicts are hositlities that involve governments, militias and other armed groups. This application focuses on some of the most significant conflicts around the world.
         These are all conflicts which had more than 1000 deaths in 2019, and are considered to be "wars" by the Uppsala conflict Data Program. The buttons below allow you to learn about these conflicts, and the
         effects they had on countries:
 
     </string>
+
+    <string name="afghan_text_1">The Afghanistan conflict consists of a series of wars that has plagued Afghanistan since 1978. It involves various major conflicts, including the Soviet-Afghan War, The Afghan Civil War, as well as the USA\'s invasion and war in the country</string>
+    <string name="afghan_text_2">Currently, much of the country is controlled by the NATO backed government, called the Islamic Republic of Afghanistan. This group worked together with Western forces in 2001 to overthrow the Taliban led government, known as the Islamic Emirate of Afghanistan. \n\n Currently the Taliban only holds smaller territories throughout the country, primarily in mountainous areas. The Taliban is a Sunni fundamentalist movement, which believes in establishing a state based on Sharia/Islamic law. The group also worked alongside other Jihadist groups, such as Al-Qaeda and the Islamic State.  </string>
+    <string name="afghan_text_3">The conflict has caused devastating effects on the country. Since the start of hostilities in 1978, an estimated 1.4–2 Million people have lost their lives. The war has resulted in millions of refuges, and has devastated Afghanistan\'s economy. \n\n In terms of Human Development Index, Afghanistan ranks one of the lowest, in the 170th place out of 189 countries. Due to all the instability, Afghanistan also has the least valuable Passport in the world, joined with Iraq. This has made it more difficult for Afghanis to travel and conduct business abroad. </string>
+    <string name="afghan_text_4">In 2019 the US and Taliban planned negotiations to reduce troop levels in Afghanistan, however Trump cancelled the negotiations due to a Taliban attack. In February 2020 the US and Taliban signed a conditional peace deal, which intended for US troops to withdraw from Afghanistan. However, shortly after Taliban carried out attacks, creating much uncertainty for the possibility of stability in the country.</string>
+
+    <string name="iraq_text_1"> This is a long-running conflict that began with the 2003 invasion of Iraq led by the United States in order to overthrow Saddam Hussein and his government. This resulted in a continuous insurgency</string>
+    <string name="iraq_text_2">There have been various participants with differing allegiance throughout the conflict. In the 2003 invasion phase, it was primarily the US based coalition, against Saddam\'s government. After the invasion, a new Iraqi government was formed, which fought against Saddam loyalists and insurgents with the help of the Coalition, which included 42 countries! \n\n The Kurds gained a lot of power after Saddam\'s fall, and formed their own autonomous government, known as Kurdistan Region. The Kurds, along with Iraqi and Coalition forces fought extensively against Islamic State after its establishment and spread. </string>
+    <string name="iraq_text_3">Almost 300,000 people have lost their lives due to the conflict since 2003. The effects on infrastructure and economy has been immense. Close to 4 million people have been misplaced, and a third of the country\'s population is living in poverty. \n\n The state of the economy has resulted in unemployment levels as high as 60% in the country.The Islamic State\'s control also led to various historical, and important buildings being destroyed, including Shia mosques, churches, and ancient structures.</string>
+    <string name="iraq_text_4">With Islamic State being largely defeated by 2017, the level of fighting has dramatically decreased in the country. However, IS has continued a low-level insurgency, carrying out Terrorist attacks in the country. Protests since 2019 have also resulted in a large number of deaths, as the people if Iraq demand change in their country.  </string>
 
 </resources>

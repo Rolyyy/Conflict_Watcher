@@ -189,8 +189,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         */
 
         mClusterManager = new ClusterManager<>(this, googleMap);
-        setupDataPoints(googleMap, 1, "202002yemen.csv");
-        setupDataPoints(googleMap, 1, "201910syria.csv");
+        setupDataPoints(googleMap, 1, "2020_02_yemen.csv");
+        setupDataPoints(googleMap, 1, "2020_02_syria.csv");
 
 
 
@@ -273,12 +273,12 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 editor.commit();
                 if (checkbox_points.isChecked()) {
                     Log.d("checkbox_check", "Checkbox 2 set to TRUE!");
-                    setupDataPoints(googleMap, 1, "201910syria.csv");
+                    //setupDataPoints(googleMap, 1, "201910syria.csv");
 
 
                 } else {
                     Log.d("checkbox_check", "Checkbox 2 set to FALSE!");
-                    setupDataPoints(googleMap, 0, "201910syria.csv");
+                    //setupDataPoints(googleMap, 0, "201910syria.csv");
 
                 }
             }

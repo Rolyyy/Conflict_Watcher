@@ -38,7 +38,7 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
 
         //CSV Start
         List<String[]> rows = new ArrayList<>();
-        CSVReader csvReader = new CSVReader(EventsActivity.this, "201910syria.csv");
+        CSVReader csvReader = new CSVReader(EventsActivity.this, "2020_02_syria.csv");
         try {
             rows = csvReader.readCSV();
         } catch (IOException e) {

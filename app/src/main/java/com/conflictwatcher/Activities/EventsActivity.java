@@ -28,7 +28,7 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
 
 
     ListView myList;
-    ArrayList eventsList = new ArrayList();
+    public ArrayList eventsList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

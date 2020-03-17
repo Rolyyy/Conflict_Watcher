@@ -189,8 +189,13 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         */
 
         mClusterManager = new ClusterManager<>(this, googleMap);
-        setupDataPoints(googleMap, 1, "2020_02_yemen.csv");
-        setupDataPoints(googleMap, 1, "2020_02_syria.csv");
+        setupDataPoints(googleMap,1,"2020_02_yemen.csv");
+        setupDataPoints(googleMap,1,"2020_02_syria.csv");
+        setupDataPoints(googleMap,1,"2020_02_afghan.csv");
+        setupDataPoints(googleMap,1,"2020_02_kurdturk.csv");
+        setupDataPoints(googleMap,1,"2020_02_libya.csv");
+        setupDataPoints(googleMap,1,"2020_02_mexico.csv");
+        setupDataPoints(googleMap,1,"2020_02_somalia.csv");
 
 
 

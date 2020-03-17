@@ -12,9 +12,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.conflictwatcher.Other.CSVReader;
@@ -34,6 +36,8 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
     ListView myList;
     public ArrayList eventsList = new ArrayList();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +45,195 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
         setupNav(savedInstanceState);
 
         filterButton();
+        TextView location_text = findViewById(R.id.events_location_text);
+        location_text.setText("Syrian Civil War");
+        setupCSV("2020_02_syria.csv");
 
-        //CSV Start
+    }
+
+
+    public void filterButton() {
+        Button filter_button = findViewById(R.id.events_button_filter);
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterDialog();
+
+
+
+
+            }
+        });
+    }
+
+    public void filterDialog(){
+
+        //Creating an instance of AlertDialog
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(EventsActivity.this);
+        final View mView = getLayoutInflater().inflate(R.layout.dialog_filter, null);  //Custom layout used for the dialog
+        mBuilder.setView(mView);
+
+         Button syria_button = mView.findViewById(R.id.filter_syria);
+        syria_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Syrian Civil War");
+
+                setupCSV("2020_02_syria.csv");
+
+            }
+        });
+
+         Button afghan_button = mView.findViewById(R.id.filter_afghan);
+        afghan_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Afghanistan Conflict");
+
+                setupCSV("2020_02_afghan.csv");
+
+            }
+        });
+
+
+        Button yemen_button = mView.findViewById(R.id.filter_yemen);
+        yemen_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Yemeni Crisis");
+
+                setupCSV("2020_02_yemen.csv");
+
+            }
+        });
+
+        Button iraq_button = mView.findViewById(R.id.filter_iraq);
+        iraq_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Iraq Conflict");
+
+                setupCSV("2020_02_iraq.csv");
+
+            }
+        });
+
+        Button kurdturk_button = mView.findViewById(R.id.filter_kurdturk);
+        kurdturk_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Kurdish-Turkish Conflict");
+
+                setupCSV("2020_02_kurdturk.csv");
+
+            }
+        });
+
+        Button libya_button = mView.findViewById(R.id.filter_libya);
+        libya_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Libyan Civil War");
+
+                setupCSV("2020_02_libya.csv");
+
+            }
+        });
+
+        Button mexico_button = mView.findViewById(R.id.filter_mexico);
+        mexico_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Mexican Drug War");
+
+                setupCSV("2020_02_mexico.csv");
+
+            }
+        });
+
+
+        Button somalia_button = mView.findViewById(R.id.filter_somali);
+        somalia_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsList.clear();
+                myList.setAdapter(null);
+
+                TextView location_text = findViewById(R.id.events_location_text);
+                location_text.setText("Somali Civil War");
+
+                setupCSV("2020_02_somalia.csv");
+
+            }
+        });
+
+
+
+
+
+
+
+        //Create and display the dialog
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        //Button with onClickListener which closes the dialog:
+        Button close_dialog = mView.findViewById(R.id.filter_dialog_close);
+
+        close_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+            }
+        });
+
+
+
+    }
+
+
+    public void setupCSV(String filename){
+
+
         List<String[]> rows = new ArrayList<>();
-        CSVReader csvReader = new CSVReader(EventsActivity.this, "2020_02_syria.csv");
+        CSVReader csvReader = new CSVReader(EventsActivity.this, filename);
         try {
             rows = csvReader.readCSV();
         } catch (IOException e) {
@@ -67,33 +256,6 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
 
 
     }
-
-
-    public void filterButton() {
-        Button filter_button = findViewById(R.id.events_button_filter);
-        filter_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(EventsActivity.this, "button pressed", Toast.LENGTH_LONG).show();
-                filterDialog();
-            }
-        });
-    }
-
-    public void filterDialog(){
-
-        //Creating an instance of AlertDialog
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(EventsActivity.this);
-        View mView = getLayoutInflater().inflate(R.layout.dialog_filter, null);  //Custom layout used for the dialog
-        mBuilder.setView(mView);
-
-        //Create and display the dialog
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
-
-
-    }
-
 
     private void setupNav(Bundle savedInstanceState) {
 

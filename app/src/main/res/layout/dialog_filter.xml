@@ -35,7 +35,7 @@
 
     <Button
 
-        android:id="@+id/act_conflict_syria"
+        android:id="@+id/filter_syria"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:layout_below="@id/dialog_filter_text"
@@ -48,46 +48,46 @@
         />
 
     <Button
-        android:id="@+id/act_conflict_yemen"
+        android:id="@+id/filter_yemen"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:text="Yemeni Crisis"
         android:background="@drawable/themed_button"
         android:textColor="#ffff"
         android:textSize="12sp"
-        android:layout_below="@+id/act_conflict_syria"
+        android:layout_below="@+id/filter_syria"
         android:layout_margin="15dp"
 
         />
 
     <Button
-        android:id="@+id/act_conflict_afghan"
+        android:id="@+id/filter_afghan"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:text="Afghanistan Conflict"
         android:background="@drawable/themed_button"
         android:textColor="#ffff"
         android:textSize="12sp"
-        android:layout_toRightOf="@+id/act_conflict_syria"
+        android:layout_toRightOf="@+id/filter_syria"
         android:layout_margin="15dp"
         android:layout_below="@+id/dialog_filter_text"
         />
 
     <Button
-        android:id="@+id/act_conflict_mexico"
+        android:id="@+id/filter_mexico"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:text="Mexican Drug War"
         android:background="@drawable/themed_button"
         android:textColor="#ffff"
         android:textSize="12sp"
-        android:layout_toRightOf="@+id/act_conflict_yemen"
+        android:layout_toRightOf="@+id/filter_yemen"
         android:layout_margin="15dp"
-        android:layout_below="@+id/act_conflict_afghan"
+        android:layout_below="@+id/filter_afghan"
         />
 
     <Button
-        android:id="@+id/act_conflict_somali"
+        android:id="@+id/filter_somali"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:text="Somali Civil War"
@@ -95,24 +95,24 @@
         android:textColor="#ffff"
         android:textSize="12sp"
         android:layout_margin="15dp"
-        android:layout_below="@+id/act_conflict_yemen"
+        android:layout_below="@+id/filter_yemen"
         />
 
     <Button
-        android:id="@+id/act_conflict_iraq"
+        android:id="@+id/filter_iraq"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:text="Iraq Conflict"
         android:background="@drawable/themed_button"
         android:textColor="#ffff"
         android:textSize="12sp"
-        android:layout_toRightOf="@+id/act_conflict_somali"
+        android:layout_toRightOf="@+id/filter_somali"
         android:layout_margin="15dp"
-        android:layout_below="@+id/act_conflict_mexico"
+        android:layout_below="@+id/filter_mexico"
         />
 
     <Button
-        android:id="@+id/act_conflict_libya"
+        android:id="@+id/filter_libya"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:text="Libyan Civil War"
@@ -120,31 +120,31 @@
         android:textColor="#ffff"
         android:textSize="12sp"
         android:layout_margin="15dp"
-        android:layout_below="@+id/act_conflict_somali"
+        android:layout_below="@+id/filter_somali"
         />
 
     <Button
-        android:id="@+id/act_conflict_kurd_turk"
+        android:id="@+id/filter_kurdturk"
         android:layout_width="175dp"
         android:layout_height="33dp"
         android:text="Kurd-Turk Conflict"
         android:background="@drawable/themed_button"
         android:textColor="#ffff"
         android:textSize="12sp"
-        android:layout_toRightOf="@+id/act_conflict_libya"
+        android:layout_toRightOf="@+id/filter_libya"
         android:layout_margin="15dp"
-        android:layout_below="@+id/act_conflict_iraq"
+        android:layout_below="@+id/filter_iraq"
         />
 
     <Button
-        android:id="@+id/confirm_layers_dialog"
+        android:id="@+id/filter_dialog_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#ffff"
         android:text="Close"
         android:textStyle="bold"
-        android:layout_below="@id/act_conflict_kurd_turk"
-        android:layout_alignEnd="@id/act_conflict_kurd_turk"
+        android:layout_below="@id/filter_kurdturk"
+        android:layout_alignEnd="@id/filter_kurdturk"
         android:textColor="@color/red"
         android:stateListAnimator="@null"
         />

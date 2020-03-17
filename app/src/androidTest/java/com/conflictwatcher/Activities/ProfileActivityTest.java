@@ -83,6 +83,7 @@ public class ProfileActivityTest {
 
         assertNotNull(SettingsActivity);
 
+
         SettingsActivity.finish();
 
 

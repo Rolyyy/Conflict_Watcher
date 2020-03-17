@@ -7,15 +7,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.conflictwatcher.Other.CSVReader;
 import com.conflictwatcher.R;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
@@ -35,6 +39,8 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
         setupNav(savedInstanceState);
+
+        filterButton();
 
         //CSV Start
         List<String[]> rows = new ArrayList<>();
@@ -61,6 +67,33 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
 
 
     }
+
+
+    public void filterButton() {
+        Button filter_button = findViewById(R.id.events_button_filter);
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(EventsActivity.this, "button pressed", Toast.LENGTH_LONG).show();
+                filterDialog();
+            }
+        });
+    }
+
+    public void filterDialog(){
+
+        //Creating an instance of AlertDialog
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(EventsActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_filter, null);  //Custom layout used for the dialog
+        mBuilder.setView(mView);
+
+        //Create and display the dialog
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+
+    }
+
 
     private void setupNav(Bundle savedInstanceState) {
 

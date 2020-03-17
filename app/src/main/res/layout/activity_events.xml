@@ -35,18 +35,37 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Filter"
+        android:textColor="#ffff"
+        android:id="@+id/events_button_filter"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/themed_button"
+        />
 
     <!--ListView for events-->
     <ListView
-        android:paddingTop="35dp"
+        android:paddingTop="10dp"
         android:id="@+id/eventsListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="2dp"
         android:divider=" #6f8dad "
         android:listSelector="#9ec8f5"
+        android:layout_below="@id/events_button_filter"
         />
+
+
+    </RelativeLayout>
+
 
     </FrameLayout>
 

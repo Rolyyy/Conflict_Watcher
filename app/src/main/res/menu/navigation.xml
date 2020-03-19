@@ -36,12 +36,7 @@
                 android:icon="@drawable/ic_ackn"
                 />
 
-            <item
-                android:id="@+id/nav_help"
-                android:title="Help and Feedback"
-                android:icon="@drawable/ic_help"
 
-                />
 
         </menu>
     </item>

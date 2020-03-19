@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AcknowledgeActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/lower_toolbar"
+        />
+
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:id="@+id/ackn_button_back"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:paddingStart="10dp"
+        android:textSize="10sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/act_conflict_title"
+        android:text="Acknowledgements"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="22sp"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/ackn_button_back"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lower_toolbar"
+        android:text="All conflict data within this application is courtesy of the Armed Conflict Location &amp; Event Data Project (ACLED); https://www.acleddata.com. This data is available for use free of charge as part of a Non-commercial license. "
+        android:layout_margin="10dp"
+        />
+
+
+</RelativeLayout>

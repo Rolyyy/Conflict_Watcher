@@ -232,6 +232,7 @@ public class EventsActivity extends AppCompatActivity implements NavigationView.
     public void setupCSV(String filename){
 
 
+
         List<String[]> rows = new ArrayList<>();
         CSVReader csvReader = new CSVReader(EventsActivity.this, filename);
         try {

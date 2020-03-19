@@ -132,6 +132,10 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
 
                 break;
+
+            case R.id.nav_acknowledgments:
+                startActivity(new Intent(MapActivity.this, AcknowledgeActivity.class));
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

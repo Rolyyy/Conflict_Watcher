@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.conflictwatcher">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        >
-        <activity android:name=".Conflicts.ConflictKurdTurk"></activity>
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.AcknowledgeActivity"></activity>
+        <activity android:name=".Conflicts.ConflictKurdTurk" />
         <activity android:name=".Conflicts.ConflictMexico" />
         <activity android:name=".Conflicts.ConflictLibya" />
         <activity android:name=".Conflicts.ConflictIraq" />

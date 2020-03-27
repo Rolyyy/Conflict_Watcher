@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+
+// CODE FROM THIS CLASS IS SOURCED FROM:
+// https://en.proft.me/2017/07/6/how-read-csv-file-android/
+
+
 //Class for reading data from a CSV file within the project directory
 public class CSVReader {
 

@@ -3,6 +3,10 @@ package com.conflictwatcher;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
+//Part of this class is sourced from:
+//https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering?hl=nl
+
+
 
 //used for the implementation of clustered data items within MapActivity
 public class MyItem implements ClusterItem {

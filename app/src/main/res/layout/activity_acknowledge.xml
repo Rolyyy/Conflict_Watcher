@@ -24,6 +24,7 @@
         android:textSize="10sp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
+
         />
 
 
@@ -46,6 +47,7 @@
         android:layout_below="@+id/lower_toolbar"
         android:text="All conflict data within this application is courtesy of the Armed Conflict Location &amp; Event Data Project (ACLED); https://www.acleddata.com. This data is available for use free of charge as part of a Non-commercial license. "
         android:layout_margin="10dp"
+
         />
 
 
